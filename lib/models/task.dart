@@ -14,7 +14,7 @@ class Task {
     return {
       'title': title,
       'description': description,
-      'deadline': deadline.toIso8601String(),
+      'deadline': deadline.toString(),
       'isCompleted': isCompleted,
     };
   }

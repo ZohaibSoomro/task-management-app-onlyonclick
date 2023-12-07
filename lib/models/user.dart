@@ -1,4 +1,4 @@
-import 'package:encrypt/encrypt.dart';
+import 'dart:convert';
 
 import 'task.dart';
 
@@ -22,7 +22,7 @@ class User {
       'type': type.name,
       'name': name,
       'email': email,
-      'password': encryptPassword(email, password),
+      'password': _encryptPassword(password),
       'tasks': tasks.map((task) => task.toJson()).toList(),
     };
   }
@@ -33,7 +33,7 @@ class User {
           json['type'] == UserType.admin.name ? UserType.admin : UserType.user,
       name: json['name'],
       email: json['email'],
-      password: decryptPassword(json['email'], json['password']),
+      password: _decryptPassword(json['password']),
       tasks: (json['tasks'] as List)
           .map((taskJson) => Task.fromJson(taskJson))
           .toList(),
@@ -46,11 +46,10 @@ enum UserType {
   user,
 }
 
-String encryptPassword(String email, String password) {
-  return Encrypter(AES(Key.fromUtf8(email))).encrypt(password).base64;
+String _encryptPassword(String password) {
+  return base64Encode(utf8.encode(password));
 }
 
-String decryptPassword(String email, String hashedPassword) {
-  return Encrypter(AES(Key.fromUtf8(email)))
-      .decrypt(Encrypted.fromBase64(hashedPassword));
+String _decryptPassword(String hashedPassword) {
+  return utf8.decode(base64Decode(hashedPassword));
 }

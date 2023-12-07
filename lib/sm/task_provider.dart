@@ -5,11 +5,12 @@ import 'package:task_management_app_onlyonclick/utils/firebase_helper.dart';
 class TasksProvider extends ChangeNotifier {
   List<Task> tasks = [];
 
-  void loadTasks() async {
+  Future<List<Task>> loadTasks() async {
     final taskList = await FirebaseHelper.instance.loadTasks();
     if (taskList.isNotEmpty) {
       tasks = taskList;
       notifyListeners();
     }
+    return tasks;
   }
 }

@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "327432389642",
-    "project_id": "task-management-app-6b616",
-    "storage_bucket": "task-management-app-6b616.appspot.com"
+    "project_number": "253797500586",
+    "project_id": "evolvve-7a0f8",
+    "storage_bucket": "evolvve-7a0f8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:327432389642:android:3771ab50733ceece618bf3",
+        "mobilesdk_app_id": "1:253797500586:android:b9c7f1d1486d11aed872d3",
         "android_client_info": {
-          "package_name": "com.example.task_management_app_onlyonclick"
+          "package_name": "com.example.evolvve"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "253797500586-r8aoqh139f3g6175co4fds0md9nu3n87.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.evolvve",
+            "certificate_hash": "5279126076775c13a75c85e18915c68149e4fb77"
+          }
+        },
+        {
+          "client_id": "253797500586-btddhbha54l44oj087uleto9ih805j30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDv4GQ26h-xCmztDBaUJ2vp0xubCUMsAPA"
+          "current_key": "AIzaSyDDbgyCAue9ZO4rpDbOHqTIEY1a5j76RK4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253797500586-btddhbha54l44oj087uleto9ih805j30.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

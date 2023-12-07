@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_management_app_onlyonclick/constants.dart';
 
 class RectengularRoundedButton extends StatelessWidget {
   final Color color;
@@ -7,7 +8,7 @@ class RectengularRoundedButton extends StatelessWidget {
   final void Function() onPressed;
   const RectengularRoundedButton(
       {super.key,
-      required this.color,
+      this.color = kPrimaryColor,
       required this.buttonName,
       this.fontSize = 18,
       required this.onPressed});

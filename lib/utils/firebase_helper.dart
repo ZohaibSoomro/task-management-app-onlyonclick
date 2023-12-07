@@ -1,21 +1,57 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/rendering.dart';
 import 'package:task_management_app_onlyonclick/models/task.dart';
 import 'package:task_management_app_onlyonclick/models/user.dart';
 
 class FirebaseHelper {
   static final FirebaseHelper instance = FirebaseHelper._();
+  final _usersCollection = FirebaseFirestore.instance.collection('users');
+  final _tasksCollection = FirebaseFirestore.instance.collection('tasks');
 
   FirebaseHelper._();
 
   Future<User?> getUserWithEmail(String email) async {
-    return User(
-        type: UserType.user, name: "zhs", email: email, password: "123456");
+    try {
+      final documentSnapshot = await _usersCollection.doc(email).get();
+      if (documentSnapshot.exists) {
+        return User.fromJson(documentSnapshot.data() as Map<String, dynamic>);
+      } else {
+        print('No user found with email: $email');
+        return null;
+      }
+    } catch (e) {
+      print('Error getting user data: $e');
+      return null;
+    }
   }
 
   Future<bool?> saveUser(User user) async {
-    return true;
+    try {
+      await _usersCollection.doc(user.email).set(user.toJson());
+      return true;
+    } catch (e) {
+      debugPrint('Error saving user data: $e');
+      return null;
+    }
   }
 
-  Future<List<Task>> loadTasks() {
-    throw Exception();
+  Future<List<Task>> loadTasks() async {
+    try {
+      final querySnapshot = await _tasksCollection.get();
+      return querySnapshot.docs.map((e) => Task.fromJson(e.data())).toList();
+    } catch (e) {
+      print('Error getting all tasks: $e');
+      return [];
+    }
+  }
+
+  Future<bool?> saveTask(Task task) async {
+    try {
+      await _tasksCollection.doc(task.title).set(task.toJson());
+      return true;
+    } catch (e) {
+      debugPrint('Error saving task data: $e');
+      return null;
+    }
   }
 }
