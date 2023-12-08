@@ -5,10 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loading_overlay/loading_overlay.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task_management_app_onlyonclick/constants.dart';
 import 'package:task_management_app_onlyonclick/pages/home.dart';
 import 'package:task_management_app_onlyonclick/pages/signup.dart';
+import 'package:task_management_app_onlyonclick/sm/task_provider.dart';
 import 'package:task_management_app_onlyonclick/utils/firebase_helper.dart';
 import 'package:task_management_app_onlyonclick/widgets/my_alert_dialog.dart';
 import 'package:task_management_app_onlyonclick/widgets/rectangular_button.dart';
@@ -17,6 +19,7 @@ class Login extends StatefulWidget {
   static const String id = 'login_screen';
   static const String isLoggedIn = 'isLoggedIn';
   static const String email = 'email';
+  static const String role = 'role';
 
   const Login({Key? key}) : super(key: key);
 
@@ -189,12 +192,24 @@ class _LoginState extends State<Login> {
                               await prefs.setBool(Login.isLoggedIn, true);
                               await prefs.setString(
                                   Login.email, userFound.email);
+                              await prefs.setString(
+                                  Login.role, userFound.type.name);
+                              print("Prefs saved ${userFound.email},true");
+                              Future.delayed(const Duration(milliseconds: 5))
+                                  .then((value) {
+                                context
+                                    .read<TasksProvider>()
+                                    .setCurrentUser(userFound.email);
+                                context
+                                    .read<TasksProvider>()
+                                    .setCurrentUserRole(userFound.type);
+                              });
                             }
                             await Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        Home(user: userFound)));
+                                        Home(userEmail: userFound.email)));
                           }
                           if (mounted) {
                             if (isLoading) {

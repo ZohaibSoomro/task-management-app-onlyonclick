@@ -1,20 +1,17 @@
 import 'dart:convert';
 
-import 'task.dart';
-
 class User {
   UserType type;
   String name;
   String email;
   String password;
-  List<Task> tasks;
-
+  int tasksCount;
   User({
     required this.type,
     required this.name,
     required this.email,
     required this.password,
-    this.tasks = const [],
+    this.tasksCount = 0,
   });
 
   Map<String, dynamic> toJson() {
@@ -22,8 +19,8 @@ class User {
       'type': type.name,
       'name': name,
       'email': email,
+      'tasksCount': tasksCount,
       'password': _encryptPassword(password),
-      'tasks': tasks.map((task) => task.toJson()).toList(),
     };
   }
 
@@ -33,10 +30,8 @@ class User {
           json['type'] == UserType.admin.name ? UserType.admin : UserType.user,
       name: json['name'],
       email: json['email'],
+      tasksCount: json['tasksCount'],
       password: _decryptPassword(json['password']),
-      tasks: (json['tasks'] as List)
-          .map((taskJson) => Task.fromJson(taskJson))
-          .toList(),
     );
   }
 }

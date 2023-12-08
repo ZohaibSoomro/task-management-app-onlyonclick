@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 Future showMyAlertDialog(context, String title, String msg,
-    {int disposeAfterMillis = 2000, bool isError = true}) async {
+    {int disposeAfterMillis = 1000, bool isError = true}) async {
   return showDialog(
     context: context,
     builder: (context) {

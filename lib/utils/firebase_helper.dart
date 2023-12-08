@@ -35,7 +35,7 @@ class FirebaseHelper {
     }
   }
 
-  Future<List<Task>> loadTasks() async {
+  Future<List<Task>> getAllTasks() async {
     try {
       final querySnapshot = await _tasksCollection.get();
       return querySnapshot.docs.map((e) => Task.fromJson(e.data())).toList();
@@ -45,12 +45,44 @@ class FirebaseHelper {
     }
   }
 
-  Future<bool?> saveTask(Task task) async {
+  Future<bool?> addTask(Task task) async {
     try {
-      await _tasksCollection.doc(task.title).set(task.toJson());
+      await _tasksCollection
+          .doc(task.title.hashCode.toString())
+          .set(task.toJson());
       return true;
     } catch (e) {
       debugPrint('Error saving task data: $e');
+      return null;
+    }
+  }
+
+  Future<bool?> updateTask(String uid, Task task) async {
+    try {
+      await _tasksCollection.doc(uid).update(task.toJson());
+      return true;
+    } catch (e) {
+      print("Error updating task: $e");
+      return null;
+    }
+  }
+
+  Future<bool?> updateUser(User user) async {
+    try {
+      await _usersCollection.doc(user.email).update(user.toJson());
+      return true;
+    } catch (e) {
+      print("Error updating user: $e");
+      return null;
+    }
+  }
+
+  Future<bool?> removeTask(String uid) async {
+    try {
+      await _tasksCollection.doc(uid).delete();
+      return true;
+    } catch (e) {
+      print("Error deleting task: $e");
       return null;
     }
   }

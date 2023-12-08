@@ -5,12 +5,14 @@ class RectengularRoundedButton extends StatelessWidget {
   final Color color;
   final String buttonName;
   final double? fontSize;
+  final double padding;
   final void Function() onPressed;
   const RectengularRoundedButton(
       {super.key,
       this.color = kPrimaryColor,
       required this.buttonName,
       this.fontSize = 18,
+      this.padding = 18,
       required this.onPressed});
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class RectengularRoundedButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
           )),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 18.0),
+        padding: EdgeInsets.symmetric(vertical: padding),
         child: Text(
           buttonName,
           style: TextStyle(fontSize: fontSize),

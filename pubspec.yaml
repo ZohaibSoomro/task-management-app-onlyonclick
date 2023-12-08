@@ -21,7 +21,15 @@ dependencies:
   loading_overlay: ^0.3.0
   firebase_core: ^2.24.1
   cloud_firestore: ^4.13.4
-
+  flutter_native_splash: ^2.3.7
+  jiffy: ^6.2.1
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/logo.png
+  color_dark: "#ffffff"
+  android_12:
+    icon_background_color: "#ffffff"
+    icon_background_color_dark: "#ffffff"
 dev_dependencies:
   flutter_test:
     sdk: flutter
