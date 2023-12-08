@@ -1,16 +1,31 @@
-# task_management_app_onlyonclick
-
-A new Flutter project.
+Task Management App in Flutter
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run this project, download the zip folder, extract it, and then open it as an Android Studio Project.
+Run the following command in the terminal
+```bash
+flutter pub get
+```
+Connect a real device or open the already installed emulator from the device manager within Android Studio.
+Run the following command in the terminal to run the project
+```bash
+flutter run
+```
+The output is an application where a user can create, update, and retrieve all his tasks, whereas an
+admin can create, update, retrieve, and delete all tasks.
+To use the application, a user must register within the application first via the signup page.
 
-A few resources to get you started if this is your first Flutter project:
+## Authentication
+The authentication system works in a way that a user registers via the signup page, providing details including
+name, role, and password. The input data is validated, and the email is checked to be not already in use by
+someone else. This data is then saved in Firebase with the password being encrypted first by the application.
+Hence, on the login page, the user enters his email and password, and the credentials are checked against
+the data in Firebase after decrypting the password. If the user is successfully authenticated, the user is redirected
+to the home screen; otherwise, an appropriate error message is displayed for a better understanding of the error.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Architecture
+The application follows the MVC pattern, hence the project structure is well-maintained throughout the development.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Demo
+The demo video of the application is also provided in the assets folder.
